@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+
+sudo apt install -y evolution-data-server-common libcamel-1.2-62 libecal-2.0-1 libedataserver-1.2-24 
+# install application menu
+sudo apt install -y applications-menu
+# install datetime indicator
+sudo apt install -y wingpanel-indicator-datetime
+# install network indicator
+sudo apt install -y wingpanel-indicator-network
+# install sound indicator
+sudo apt install -y wingpanel-indicator-sound
+# install power indicator
+sudo apt install -y wingpanel-indicator-power
+# install notifications indicator
+sudo apt install -y wingpanel-indicator-notifications
+# install session indicator
+sudo apt install -y wingpanel-indicator-session
+# install bluetooth indicator
+sudo apt install -y wingpanel-indicator-bluetooth
+# install accessibility indicator
+sudo apt install -y wingpanel-indicator-a11y
+# install privacy indicator
+sudo apt install -y wingpanel-indicator-privacy
