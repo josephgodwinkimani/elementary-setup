@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sudo apt install io.elementary.wingpanel io.elementary.terminal io.elementary.settings-daemon io.elementary.notifications io.elementary.print io.elementary.code io.elementary.sideload io.elementary.screenshot
