@@ -4,7 +4,7 @@ killall io.elementary.appcenter
 
 # Remove appcenter https://github.com/elementary/appcenter
 
-sudo apt-get purge -y appcenter appstream-data-pantheon* appstream-data-pantheon-icons* appstream-data-pantheon-icons-hidpi* apt-config-icons-hidpi* apt-config-icons-large* apt-config-icons-large-hidpi*
+sudo apt-get purge -y appcenter appstream-data-pantheon* appstream-data-pantheon-icons* appstream-data-pantheon-icons-hidpi* apt-config-icons-hidpi* apt-config-icons-large* apt-config-icons-large-hidpi* evolution-*
 sudo apt policy appstream
 sudo apt-mark hold appstream
 sudo apt-get update -y
