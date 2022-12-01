@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-
+# Install dependencies
 sudo apt install -y evolution-data-server-common libcamel-1.2-62 libecal-2.0-1 libedataserver-1.2-24 
 # install application menu
 sudo apt install -y applications-menu
