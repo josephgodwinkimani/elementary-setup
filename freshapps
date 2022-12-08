@@ -7,6 +7,7 @@ cd /tmp
 wget -v https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb
 cat /etc/apt/sources.list.d/google-chrome.list
+apt-cache policy google-chrome-stable
 
 # install ms visual studio code
 wget -v https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
