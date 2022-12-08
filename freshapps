@@ -95,7 +95,3 @@ apt-cache policy obs-studio
 # install videoLan Player
 sudo apt install vlc -y
 apt-cache policy vlc
-
-
-
-
