@@ -29,6 +29,7 @@ sudo apt purge android-studio -y
 sudo apt purge obs-studio -y
 sudo apt purge vlc -y
 sudo apt purge com.github.donadigo.eddy -y
+sudo apt autoclean
 sudo apt autoremove -y
 sudo apt update -y
 echo "##########################"
