@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 flatpak uninstall --all
-sudo apt-get remove --autoremove flatpak -y
-sudo apt-get purge flatpak -y
+sudo apt-get remove --autoremove flatpak* -y
+sudo apt-get purge flatpak* -y
 sudo rm -rf ~/.var
 sudo rm -rf ~/.cache/flatpak
 sudo rm -rf var/lib/flatpak
