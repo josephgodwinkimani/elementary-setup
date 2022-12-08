@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 flatpak uninstall --all -y
-sudo apt-get remove --autoremove flatpak* -y
+sudo apt-get remove flatpak* -y
 sudo apt-get purge flatpak* -y
 sudo rm -rf ~/.var
 sudo rm -rf ~/.cache/flatpak
 sudo rm -rf var/lib/flatpak
 sudo rm -rf ~/.local/share/flatpak
-sudo systemctl stop snapd -y
-sudo systemctl disable snapd -y
+sudo systemctl stop snapd
+sudo systemctl disable snapd
 sudo apt purge snapd -y
 sudo rm -rf ~/snap
 sudo rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd /root/snap
@@ -22,7 +22,7 @@ sudo apt purge code -y
 sudo rm -rf ~/.vscode
 sudo rm -rf ~/.config/Code
 sudo apt purge remmina remmina-plugin-rdp remmina-plugin-secret -y
-sudo apt purge wps-office -y
+sudo apt purge wps-office wps* -y
 sudo rm -rf ~/.config/Kingsoft
 sudo rm -rf ~/.config/kingsoft
 sudo rm -rf ~/.local/share/Kingsoft
@@ -30,8 +30,13 @@ sudo apt purge thunderbird* -y
 sudo apt purge lando -y
 sudo rm -rf ~/.lando
 sudo systemctl stop docker
-sudo apt-get purge -y docker-engine docker docker.io docker-ce containerd  
-sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce containerd  
+sudo apt-get purge -y docker-engine docker docker.io docker-ce docker-desktop containerd  
+sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce docker-desktop containerd  
+docker rmi $(docker images -a -q)
+docker rm $(docker ps -a -f status=exited -q)
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker volume prune
 sudo umount /var/lib/docker/
 sudo rm -rf /var/lib/docker /etc/docker
 sudo rm /etc/apparmor.d/docker
