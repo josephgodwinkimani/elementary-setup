@@ -10,7 +10,7 @@ sudo rm -rf ~/.local/share/flatpak
 sudo systemctl stop snapd -y
 sudo systemctl disable snapd -y
 sudo apt purge snapd -y
-rm -rf ~/snap
+sudo rm -rf ~/snap
 sudo rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd /root/snap
 sudo rm -r /usr/bin/Postman
 sudo rm -r /usr/share/applications/Postman.desktop
