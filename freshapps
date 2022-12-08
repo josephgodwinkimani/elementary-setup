@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-flatpak uninstall --unused
+flatpak uninstall --all
 sudo apt-get remove --autoremove flatpak
 sudo apt-get purge flatpak
+sudo rm -rf var/lib/flatpak
 sudo systemctl stop snapd && sudo systemctl disable snapd
 sudo apt purge snapd
 rm -rf ~/snap
