@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+sudo apt install -y ca-certificates curl gnupg lsb-release
+sudo apt update -y
+cd /tmp
+# install google chrome
+wget -v https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
+cat /etc/apt/sources.list.d/google-chrome.list
+
+# install ms visual studio code
+wget -v https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+sudo apt install code -y
+sudo apt update -y
+apt-cache policy code
+
+# install remmina - Remote access screen and file sharing to your desktop
+sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
+sudo apt update -y
+sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret -y
+apt-cache policy remmina
+
+# install wps office
+wget -v https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/11664/wps-office_11.1.0.11664.XA_amd64.deb
+sudo apt install ./wps-office_11.1.0.11664.XA_amd64.deb
+
+# install thunderbird
+sudo apt-get install thunderbird -y
+
+# install postman
+wget -v https://dl.pstmn.io/download/latest/linux64
+sudo tar -xvf linux64 -C /usr/bin
+echo 'export PATH="$PATH:/usr/bin/Postman"' >> ~/.bashrc
+sudo tee /usr/share/applications/Postman.desktop <<"EOF"
+[Desktop Entry]
+Name=Postman API Tool
+GenericName=Postman
+Comment=Testing API
+Exec=/usr/bin/Postman/Postman
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/usr/bin/Postman/app/resources/app/assets/icon.png
+StartupWMClass=Postman
+StartupNotify=true
+EOF
+cp /usr/share/applications/Postman.desktop ~/Desktop/
+
+# install docker
+sudo mkdir -p /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+# install lando
+wget https://files.lando.dev/installer/lando-x64-stable.deb
+sudo dpkg -i lando-x64-stable.deb -y
+
+# install teamviewer
+wget -v https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+sudo apt install ./teamviewer_amd64.deb -y
+apt-cache policy teamviewer
+
+# install localwp
+wget -v https://cdn.localwp.com/releases-stable/6.5.2+6204/local-6.5.2-linux.deb
+sudo apt install ./local-6.5.2-linux.deb -y
+apt-cache policy local
+
+# install eddy debian package installer for elementary OS
+sudo apt install valac libgranite-dev libpackagekit-glib2-dev libunity-dev meson ninja-build libzeitgeist-2.0-dev gettext
+meson build && cd build
+meson configure -Dprefix=/usr
+ninja
+sudo ninja install -y
+
+# install gimp
+sudo apt install gimp -y
+apt-cache policy gimp
+
+# install inkscape
+sudo apt install inkscape  -y
+apt-cache policy inkscape
+
+# install android studio - https://launchpad.net/~maarten-fonville/+archive/ubuntu/android-studio
+sudo add-apt-repository ppa:maarten-fonville/android-studio -y
+sudo apt-get update -y
+sudo apt install android-studio -y
+apt-cache policy android-studio
+
+# install obs studio
+sudo apt install obs-studio -y
+apt-cache policy obs-studio
+
+# install videoLan Player
+sudo apt install vlc -y
+apt-cache policy vlc
+
+
+
+
