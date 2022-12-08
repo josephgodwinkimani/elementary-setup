@@ -57,7 +57,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 sudo apt update -y
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 # install lando
-wget https://files.lando.dev/installer/lando-x64-stable.deb
+sudo wget https://files.lando.dev/installer/lando-x64-stable.deb
 sudo dpkg -i lando-x64-stable.deb -y
 
 # install teamviewer
@@ -105,7 +105,6 @@ apt-cache policy vlc
 # clean up
 sudo rm -f google-chrome-stable_current_amd64.deb
 sudo rm -f wps-office_11.1.0.11664.XA_amd64.deb
-sudo rm -f linux64
 sudo rm -f lando-x64-stable.deb
 sudo rm -f teamviewer_amd64.deb
 sudo rm -f local-6.5.2-linux.deb
