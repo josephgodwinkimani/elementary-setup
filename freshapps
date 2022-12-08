@@ -120,6 +120,8 @@ sudo rm -f lando-x64-stable.deb
 sudo rm -f teamviewer_amd64.deb
 sudo rm -f local-6.5.2-linux.deb
 
+apt list
+
 echo "##########################"
 echo "Ready to Rock"
 echo "##########################"
