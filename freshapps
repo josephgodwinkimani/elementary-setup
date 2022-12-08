@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+flatpak uninstall --unused
+sudo apt-get remove --autoremove flatpak
+sudo apt-get purge flatpak
+sudo systemctl stop snapd && sudo systemctl disable snapd
+sudo apt purge snapd
+rm -rf ~/snap
+sudo rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd /root/snap
+
 sudo apt install -y ca-certificates curl gnupg lsb-release
 sudo apt update -y
 cd /tmp
