@@ -26,6 +26,7 @@ sudo apt purge teamviewer -y
 sudo apt purge gimp -y
 sudo apt purge inkscape -y
 sudo apt purge android-studio -y
+sudo rm -rf ~/.android
 sudo apt purge obs-studio -y
 sudo apt purge vlc -y
 sudo apt purge com.github.donadigo.eddy -y
