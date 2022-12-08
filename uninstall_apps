@@ -4,12 +4,16 @@ sudo rm -r /usr/bin/Postman
 sudo rm -r /usr/share/applications/Postman.desktop
 sudo rm -r ~/Desktop/Postman.desktop
 sudo apt purge google-chrome-stable -y
-cd ~/.config
-sudo rm -rf google-chrome
+sudo rm -rf ~/.config/google-chrome
+sudo rm -rf ~/.cache/google-chrome
 sudo apt purge code -y
 sudo rm -rf ~/.vscode
+sudo rm -rf ~/.config/Code
 sudo apt purge remmina remmina-plugin-rdp remmina-plugin-secret -y
 sudo apt purge wps-office -y
+sudo rm -rf ~/.config/Kingsoft
+sudo rm -rf ~/.config/kingsoft
+sudo rm -rf ~/.local/share/Kingsoft
 sudo apt purge thunderbird* -y
 sudo apt purge lando -y
 sudo rm -rf ~/.lando
@@ -22,11 +26,19 @@ sudo rm /etc/apparmor.d/docker
 sudo groupdel docker
 sudo rm -rf /var/run/docker.sock
 sudo rm -rf /usr/bin/docker-compose
+sudo rm -rf ~/.docker
 sudo apt purge teamviewer -y
+sudo rm -rf ~/.config/teamviewer
+sudo rm -rf ~/.local/share/teamviewer15
+sudo rm -rf ~/.cache/TeamViewer
+apt show local
+sudo apt purge local -y
+sudo rm -rf ~/.config/Local
 sudo apt purge gimp -y
 sudo apt purge inkscape -y
 sudo apt purge android-studio -y
 sudo rm -rf ~/.android
+sudo rm -rf ~/Android
 sudo apt purge obs-studio -y
 sudo apt purge vlc -y
 sudo apt purge com.github.donadigo.eddy -y
