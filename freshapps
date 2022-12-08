@@ -16,6 +16,8 @@ sudo autoremove -y
 
 sudo apt install -y ca-certificates curl gnupg lsb-release
 sudo apt update -y
+# install all appimages here now and in future
+
 cd /tmp
 
 # install htop
@@ -50,10 +52,24 @@ apt-cache policy wps-office
 sudo apt-get install thunderbird -y
 apt-cache policy thunderbird
 
-# install postman - https://github.com/valicm/Postman-AppImage
-sudo wget -vc https://github.com/valicm/Postman-AppImage/releases/download/latest/Postman-x86_64.AppImage
-sudo chmod +x Postman-x86_64.AppImage
-./Postman-x86_64.AppImage
+# install postman
+wget -v https://dl.pstmn.io/download/latest/linux64
+sudo tar -xvf linux64 -C /usr/bin
+echo 'export PATH="$PATH:/usr/bin/Postman"' >> ~/.bashrc
+sudo tee /usr/share/applications/Postman.desktop <<"EOF"
+[Desktop Entry]
+Name=Postman API Tool
+GenericName=Postman
+Comment=Testing API
+Exec=/usr/bin/Postman/Postman
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/usr/bin/Postman/app/resources/app/assets/icon.png
+StartupWMClass=Postman
+StartupNotify=true
+EOF
+cp /usr/share/applications/Postman.desktop ~/Desktop/
 
 # install docker
 sudo mkdir -p /etc/apt/keyrings
