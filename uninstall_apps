@@ -13,6 +13,7 @@ sudo apt purge wps-office -y
 sudo apt purge thunderbird* -y
 sudo apt purge lando -y
 sudo rm -rf ~/.lando
+sudo systemctl stop docker
 sudo apt-get purge -y docker-engine docker docker.io docker-ce containerd  
 sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce containerd  
 sudo umount /var/lib/docker/
