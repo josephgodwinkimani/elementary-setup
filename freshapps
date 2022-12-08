@@ -3,6 +3,7 @@
 flatpak uninstall --all
 sudo apt-get remove --autoremove flatpak
 sudo apt-get purge flatpak
+sudo rm -rf ~/.var
 sudo rm -rf ~/.cache/flatpak
 sudo rm -rf var/lib/flatpak
 sudo rm -rf ~/.local/share/flatpak
