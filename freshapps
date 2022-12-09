@@ -17,14 +17,6 @@ sudo rm -f /tmp/lando-x64-stable.deb
 sudo rm -f /tmp/teamviewer_amd64.deb
 sudo rm -f /tmp/local-6.5.2-linux.deb
 
-log_info "Removing snap ..."
-sudo systemctl stop snapd
-sudo systemctl disable snapd
-sudo apt purge snapd
-sudo rm -rf ~/snap
-sudo rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd /root/snap
-sudo autoremove -y
-
 sudo apt install -y ca-certificates curl gnupg lsb-release
 sudo apt update -y
 
