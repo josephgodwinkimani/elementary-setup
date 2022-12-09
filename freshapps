@@ -17,9 +17,6 @@ sudo rm -f /tmp/lando-x64-stable.deb
 sudo rm -f /tmp/linux64
 sudo rm -f /tmp/teamviewer_amd64.deb
 sudo rm -f /tmp/local-6.5.2-linux.deb
-sudo apt purge com.github.donadigo.eddy -y
-sudo apt autoclean
-sudo apt autoremove -y
 
 sudo apt install -y ca-certificates curl gnupg lsb-release
 sudo apt update -y
@@ -114,15 +111,17 @@ sudo apt install ./local-6.5.2-linux.deb -y
 apt-cache policy local
 
 log_info "Installing Eddy debian package installer for elementary OS ..."
-sudo apt install valac libgranite-dev libpackagekit-glib2-dev libunity-dev meson ninja-build libzeitgeist-2.0-dev gettext git -y
-git clone https://github.com/donadigo/eddy.git eddy
-cd eddy
-meson build && cd build
-meson configure -Dprefix=/usr
-ninja
-sudo ninja install
-cd ../
-
+  if ! com.github.donadigo.eddy; then
+    sudo apt install valac libgranite-dev libpackagekit-glib2-dev libunity-dev meson ninja-build libzeitgeist-2.0-dev gettext git -y
+    git clone https://github.com/donadigo/eddy.git eddy
+    cd eddy
+    meson build && cd build
+    meson configure -Dprefix=/usr
+    ninja
+    sudo ninja install
+    cd ../
+  fi
+  
 log_info "Installing Gimp ..."
   if ! gimp --version; then
     sudo apt install gimp -y
