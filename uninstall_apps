@@ -78,6 +78,8 @@ sudo rm -rf ~/.android
 sudo rm -rf ~/Android
 sudo apt purge obs-studio -y
 sudo apt purge vlc -y
+sudo apt remove --purge imagemagick -y
+sudo apt remove --purge imagemagick* -y
 sudo apt purge com.github.donadigo.eddy -y
 sudo apt autoclean
 sudo apt autoremove -y
