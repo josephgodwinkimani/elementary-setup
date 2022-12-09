@@ -58,8 +58,9 @@ log_info "Installing WPS Office ..."
   
 log_info "Installing Mozilla Thunderbird ..."
   if ! thunderbird --version; then
-sudo apt-get install thunderbird -y
-apt-cache policy thunderbird
+    sudo apt-get install thunderbird -y
+    apt-cache policy thunderbird
+  fi
 
 log_info "Installing Postman ..."
 wget -v https://dl.pstmn.io/download/latest/linux64
