@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
+trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+
+set -e
+log_info() {
+  printf "\n\e[0;35m $1\e[0m\n\n"
+}
+
 cd /tmp
 
-# clean up
+log_info "Cleaning up ..."
 sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
 sudo rm -f /tmp/wps-office_11.1.0.11664.XA_amd64.deb
 sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
@@ -10,6 +17,7 @@ sudo rm -f /tmp/lando-x64-stable.deb
 sudo rm -f /tmp/teamviewer_amd64.deb
 sudo rm -f /tmp/local-6.5.2-linux.deb
 
+log_info "Removing snap ..."
 sudo systemctl stop snapd
 sudo systemctl disable snapd
 sudo apt purge snapd
@@ -20,39 +28,47 @@ sudo autoremove -y
 sudo apt install -y ca-certificates curl gnupg lsb-release
 sudo apt update -y
 
-# install htop
+log_info "Installing HTOP ..."
 sudo apt install htop -y
 apt-cache policy htop
 
-# install google chrome
-sudo wget -vc https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
-cat /etc/apt/sources.list.d/google-chrome.list
-apt-cache policy google-chrome-stable
+log_info "Installing Google Chrome ..."
+  if ! google-chrome --version; then
+    sudo wget -vc https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo apt install ./google-chrome-stable_current_amd64.deb
+    cat /etc/apt/sources.list.d/google-chrome.list
+    apt-cache policy google-chrome-stable
+  fi
+  
+log_info "Installing Microsoft Visual Code ..."
+  if ! code --version; then
+    sudo wget -vc https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    sudo apt install code -y
+    sudo apt update -y
+    apt-cache policy code
+  fi
 
-# install ms visual studio code
-sudo wget -vc https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-sudo apt install code -y
-sudo apt update -y
-apt-cache policy code
+log_info "Installing Remmina - Remote access screen and file sharing to your desktop ..."
+  if ! code --version; then    
+    sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
+    sudo apt update -y
+    sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret -y
+    apt-cache policy remmina
+  fi
 
-# install remmina - Remote access screen and file sharing to your desktop
-sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
-sudo apt update -y
-sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret -y
-apt-cache policy remmina
-
-# install wps office
-sudo wget -vc https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/11664/wps-office_11.1.0.11664.XA_amd64.deb
-sudo apt install ./wps-office_11.1.0.11664.XA_amd64.deb
-apt-cache policy wps-office
-
-# install thunderbird
+log_info "Installing WPS Office ..."
+  if ! wps-office --version; then
+    sudo wget -vc https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/11664/wps-office_11.1.0.11664.XA_amd64.deb
+    sudo apt install ./wps-office_11.1.0.11664.XA_amd64.deb
+    apt-cache policy wps-office
+  fi
+  
+log_info "Installing Mozilla Thunderbird ..."
 sudo apt-get install thunderbird -y
 apt-cache policy thunderbird
 
-# install postman
+log_info "Installing Postman ..."
 wget -v https://dl.pstmn.io/download/latest/linux64
 sudo tar -xvf linux64 -C /usr/bin
 echo 'export PATH="$PATH:/usr/bin/Postman"' >> ~/.bashrc
@@ -71,34 +87,39 @@ StartupNotify=true
 EOF
 cp /usr/share/applications/Postman.desktop ~/Desktop/
 
-# install docker
-sudo mkdir -p /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-apt-cache policy docker-ce
-sudo apt update -y
-sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-sudo usermod -aG docker ${USER}
-su - ${USER}
-groups
-sudo wget -vc https://desktop.docker.com/linux/main/amd64/docker-desktop-4.15.0-amd64.deb
-sudo apt install ./docker-desktop-4.15.0-amd64.deb
-# install lando
+log_info "Installing Docker ..."
+  if ! docker --version; then
+    sudo mkdir -p /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    apt-cache policy docker-ce
+    sudo apt update -y
+    sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+    sudo usermod -aG docker ${USER}
+    su - ${USER}
+    groups
+    sudo wget -vc https://desktop.docker.com/linux/main/amd64/docker-desktop-4.15.0-amd64.deb
+    sudo apt install ./docker-desktop-4.15.0-amd64.deb
+  fi
+  
+log_info "Installing Lando ..."
 sudo wget https://files.lando.dev/installer/lando-x64-stable.deb
 sudo dpkg -i lando-x64-stable.deb -y
 
-# install teamviewer
-sudo wget -vc https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
-sudo apt install ./teamviewer_amd64.deb -y
-apt-cache policy teamviewer
+log_info "Installing Teamviewer ..."
+  if ! teamviewer --version; then
+    sudo wget -vc https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+    sudo apt install ./teamviewer_amd64.deb -y
+    apt-cache policy teamviewer
+  fi
 
-# install localwp
+log_info "Installing Local by Flywheel ..."
 sudo wget -vc https://cdn.localwp.com/releases-stable/6.5.2+6204/local-6.5.2-linux.deb
 sudo apt install ./local-6.5.2-linux.deb -y
 apt-cache policy local
 
-# install eddy debian package installer for elementary OS
+log_info "Installing Eddy debian package installer for elementary OS ..."
 sudo apt install valac libgranite-dev libpackagekit-glib2-dev libunity-dev meson ninja-build libzeitgeist-2.0-dev gettext git -y
 git clone https://github.com/donadigo/eddy.git eddy
 cd eddy
@@ -108,29 +129,39 @@ ninja
 sudo ninja install -y
 cd ../
 
-# install gimp
-sudo apt install gimp -y
-apt-cache policy gimp
+log_info "Installing Gimp ..."
+  if ! gimp --version; then
+    sudo apt install gimp -y
+    apt-cache policy gimp
+  fi
 
-# install inkscape
-sudo apt install inkscape  -y
-apt-cache policy inkscape
+log_info "Installing Inkscape ..."
+  if ! inkscape --version; then
+    sudo apt install inkscape  -y
+    apt-cache policy inkscape
+  fi
 
-# install android studio - https://launchpad.net/~maarten-fonville/+archive/ubuntu/android-studio
-sudo add-apt-repository ppa:maarten-fonville/android-studio -y
-sudo apt-get update -y
-sudo apt install android-studio -y
-apt-cache policy android-studio
+log_info "Installing android studio - https://launchpad.net/~maarten-fonville/+archive/ubuntu/android-studio ..."
+  if ! android-studio --version; then
+    sudo add-apt-repository ppa:maarten-fonville/android-studio -y
+    sudo apt-get update -y
+    sudo apt install android-studio -y
+    apt-cache policy android-studio
+  fi
+  
+log_info "Installing OBS Studio ..."
+  if ! obs-studio --version; then
+    sudo apt install obs-studio -y
+    apt-cache policy obs-studio
+  fi
 
-# install obs studio
-sudo apt install obs-studio -y
-apt-cache policy obs-studio
+log_info "Installing videoLan Player ..."
+  if ! vlc --version; then
+    sudo apt install vlc -y
+    apt-cache policy vlc
+  fi
 
-# install videoLan Player
-sudo apt install vlc -y
-apt-cache policy vlc
-
-# clean up
+log_info "Cleaning up ..."
 sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
 sudo rm -f /tmp/wps-office_11.1.0.11664.XA_amd64.deb
 sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
