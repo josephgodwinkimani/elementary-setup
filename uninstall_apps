@@ -56,7 +56,8 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 docker volume prune
 sudo umount /var/lib/docker/
-sudo rm -rf /var/lib/docker /etc/docker
+sudo rm -rf /var/lib/docker 
+sudo rm -rf /etc/docker
 sudo rm /etc/apparmor.d/docker
 sudo groupdel docker
 sudo rm -rf /var/run/docker.sock
