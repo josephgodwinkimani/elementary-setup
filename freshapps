@@ -117,7 +117,7 @@ cd eddy
 meson build && cd build
 meson configure -Dprefix=/usr
 ninja
-sudo ninja install -y
+sudo ninja install
 cd ../
 
 log_info "Installing Gimp ..."
