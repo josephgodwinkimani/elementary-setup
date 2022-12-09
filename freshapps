@@ -90,8 +90,6 @@ apt-cache policy docker-ce
 sudo apt update -y
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 sudo usermod -aG docker ${USER}
-su - ${USER}
-groups
 sudo wget -vc https://desktop.docker.com/linux/main/amd64/docker-desktop-4.15.0-amd64.deb
 sudo apt install ./docker-desktop-4.15.0-amd64.deb -y
 
