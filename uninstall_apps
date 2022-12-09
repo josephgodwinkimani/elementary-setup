@@ -59,7 +59,7 @@ sudo docker volume prune
 sudo umount /var/lib/docker/
 sudo rm -rf /var/lib/docker 
 sudo rm -rf /etc/docker
-sudo rm /etc/apparmor.d/docker
+sudo rm -f /etc/apparmor.d/docker
 sudo groupdel docker
 sudo rm -rf /var/run/docker.sock
 sudo rm -rf /usr/bin/docker-compose
