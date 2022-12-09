@@ -11,6 +11,7 @@ cd /tmp
 
 log_info "Cleaning up ..."
 sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
+sudo rm -f /tmp/pycharm-community-2022.3.tar.gz
 sudo rm -f /tmp/wps-office_11.1.0.11664.XA_amd64.deb
 sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
 sudo rm -f /tmp/lando-x64-stable.deb
@@ -32,6 +33,12 @@ log_info "Installing Google Chrome ..."
     cat /etc/apt/sources.list.d/google-chrome.list
     apt-cache policy google-chrome-stable
   fi
+  
+log_info "Installing PyCharm ..."  
+sudo wget -vc https://download.jetbrains.com/python/pycharm-community-2022.3.tar.gz
+sudo tar -xzf pycharm-community-2022.3.tar.gz
+sudo mv pycharm-community-2022.3/ /${USER}/pycharm-community-2022.3/
+cd bin && sudo chmod u+x pycharm.sh
   
 log_info "Installing Microsoft Visual Code ..."
   if ! code --version; then
@@ -156,6 +163,7 @@ log_info "Installing videoLan Player ..."
 
 log_info "Cleaning up ..."
 sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
+sudo rm -f /tmp/pycharm-community-2022.3.tar.gz
 sudo rm -f /tmp/wps-office_11.1.0.11664.XA_amd64.deb
 sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
 sudo rm -f /tmp/lando-x64-stable.deb
