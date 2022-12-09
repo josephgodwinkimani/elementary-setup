@@ -17,6 +17,9 @@ sudo rm -f /tmp/lando-x64-stable.deb
 sudo rm -f /tmp/linux64
 sudo rm -f /tmp/teamviewer_amd64.deb
 sudo rm -f /tmp/local-6.5.2-linux.deb
+sudo apt purge com.github.donadigo.eddy -y
+sudo apt autoclean
+sudo apt autoremove -y
 
 sudo apt install -y ca-certificates curl gnupg lsb-release
 sudo apt update -y
