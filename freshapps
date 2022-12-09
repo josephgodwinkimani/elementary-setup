@@ -94,7 +94,7 @@ sudo usermod -aG docker ${USER}
 su - ${USER}
 groups
 sudo wget -vc https://desktop.docker.com/linux/main/amd64/docker-desktop-4.15.0-amd64.deb
-sudo apt install ./docker-desktop-4.15.0-amd64.deby -y
+sudo apt install ./docker-desktop-4.15.0-amd64.deb -y
 
   
 log_info "Installing Lando ..."
