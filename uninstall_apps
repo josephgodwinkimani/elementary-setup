@@ -51,11 +51,11 @@ sudo apt -y --purge docker.io
 sudo apt -y --purge docker-ce 
 sudo apt -y --purge docker-desktop 
 sudo apt -y --purge containerd  
-docker rmi $(docker images -a -q)
-docker rm $(docker ps -a -f status=exited -q)
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-docker volume prune
+sudo docker rmi $(docker images -a -q)
+sudo docker rm $(docker ps -a -f status=exited -q)
+sudo docker stop $(docker ps -a -q)
+sudo docker rm $(docker ps -a -q)
+sudo docker volume prune
 sudo umount /var/lib/docker/
 sudo rm -rf /var/lib/docker 
 sudo rm -rf /etc/docker
