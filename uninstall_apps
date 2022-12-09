@@ -11,7 +11,12 @@ sudo systemctl stop snapd
 sudo systemctl disable snapd
 sudo apt purge snapd
 sudo rm -rf ~/snap
-sudo rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd /root/snap
+sudo rm -rf /snap 
+sudo rm -rf /var/snap 
+sudo rm -rf /var/lib/snapd 
+sudo rm -rf /var/cache/snapd 
+sudo rm -rf /usr/lib/snapd 
+sudo rm -rf /root/snap
 sudo dpkg --configure -a
 sudo rm -r /usr/bin/Postman
 sudo rm -r /usr/share/applications/Postman.desktop
@@ -22,7 +27,9 @@ sudo rm -rf ~/.cache/google-chrome
 sudo apt purge code -y
 sudo rm -rf ~/.vscode
 sudo rm -rf ~/.config/Code
-sudo apt purge remmina remmina-plugin-rdp remmina-plugin-secret -y
+sudo apt purge remmina -y
+sudo apt purge remmina-plugin-rdp -y
+sudo apt purge remmina-plugin-secret -y
 sudo apt purge wps-office wps* -y
 sudo rm -rf ~/.config/Kingsoft
 sudo rm -rf ~/.config/kingsoft
@@ -31,8 +38,18 @@ sudo apt purge thunderbird* -y
 sudo apt purge lando -y
 sudo rm -rf ~/.lando
 sudo systemctl stop docker
-sudo apt purge -y docker-engine docker docker.io docker-ce docker-desktop containerd  
-sudo apt -y --purge docker-engine docker docker.io docker-ce docker-desktop containerd  
+sudo apt purge -y docker-engine 
+sudo apt purge -y docker 
+sudo apt purge -y docker.io 
+sudo apt purge -y docker-ce 
+sudo apt purge -y docker-desktop 
+sudo apt purge -y containerd  
+sudo apt -y --purge docker-engine 
+sudo apt -y --purge docker 
+sudo apt -y --purge docker.io 
+sudo apt -y --purge docker-ce 
+sudo apt -y --purge docker-desktop 
+sudo apt -y --purge containerd  
 docker rmi $(docker images -a -q)
 docker rm $(docker ps -a -f status=exited -q)
 docker stop $(docker ps -a -q)
