@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-flatpak uninstall --all -y
-sudo apt-get remove --autoremove flatpak* -y
-sudo apt-get purge flatpak* -y
-sudo rm -rf ~/.var
-sudo rm -rf ~/.cache/flatpak
-sudo rm -rf var/lib/flatpak
-sudo rm -rf ~/.local/share/flatpak
 sudo systemctl stop snapd
 sudo systemctl disable snapd
 sudo apt purge snapd
@@ -16,7 +9,6 @@ sudo autoremove -y
 
 sudo apt install -y ca-certificates curl gnupg lsb-release
 sudo apt update -y
-# install all appimages here now and in future
 
 cd /tmp
 
@@ -73,10 +65,21 @@ cp /usr/share/applications/Postman.desktop ~/Desktop/
 
 # install docker
 sudo mkdir -p /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+apt-cache policy docker-ce
 sudo apt update -y
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+sudo usermod -aG docker ${USER}
+su - ${USER}
+groups
+sudo wget -vc https://desktop.docker.com/linux/main/amd64/docker-desktop-4.15.0-amd64.deb
+sudo apt-get install ./docker-desktop-4.15.0-amd64.deb
+docker info
+docker compose version
+docker version
+systemctl --user disable docker-desktop
 # install lando
 sudo wget https://files.lando.dev/installer/lando-x64-stable.deb
 sudo dpkg -i lando-x64-stable.deb -y
