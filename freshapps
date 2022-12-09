@@ -37,7 +37,7 @@ log_info "Installing Google Chrome ..."
 log_info "Installing PyCharm ..."  
 sudo wget -vc https://download.jetbrains.com/python/pycharm-community-2022.3.tar.gz
 sudo tar -xzf pycharm-community-2022.3.tar.gz
-sudo mv pycharm-community-2022.3/ /${USER}/pycharm-community-2022.3/
+sudo mv pycharm-community-2022.3/ /home/${USER}/pycharm-community-2022.3/
 cd bin && sudo chmod u+x pycharm.sh
   
 log_info "Installing Microsoft Visual Code ..."
