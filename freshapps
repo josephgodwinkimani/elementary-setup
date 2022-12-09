@@ -50,13 +50,14 @@ log_info "Installing Remmina - Remote access screen and file sharing to your des
   fi
 
 log_info "Installing WPS Office ..."
-  if ! wps --version; then
+  if ! apt-cache search wps-office; then
     sudo wget -vc https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/11664/wps-office_11.1.0.11664.XA_amd64.deb
     sudo apt install ./wps-office_11.1.0.11664.XA_amd64.deb
     apt-cache policy wps-office
   fi
   
 log_info "Installing Mozilla Thunderbird ..."
+  if ! thunderbird --version; then
 sudo apt-get install thunderbird -y
 apt-cache policy thunderbird
 
