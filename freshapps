@@ -12,6 +12,7 @@ cd /tmp
 log_info "Cleaning up ..."
 sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
 sudo rm -f /tmp/pycharm-community-2022.3.tar.gz
+sudo rm -rf /home/${USER}/pycharm-community-2022.3
 sudo rm -f /tmp/wps-office_11.1.0.11664.XA_amd64.deb
 sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
 sudo rm -f /tmp/lando-x64-stable.deb
