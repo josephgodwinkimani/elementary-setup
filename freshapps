@@ -80,7 +80,6 @@ Icon=/usr/bin/Postman/app/resources/app/assets/icon.png
 StartupWMClass=Postman
 StartupNotify=true
 EOF
-cp /usr/share/applications/Postman.desktop ~/Desktop/
 
 log_info "Installing Docker ..."
 sudo mkdir -p /etc/apt/keyrings
