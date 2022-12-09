@@ -82,20 +82,19 @@ EOF
 cp /usr/share/applications/Postman.desktop ~/Desktop/
 
 log_info "Installing Docker ..."
-  if ! docker --version; then
-    sudo mkdir -p /etc/apt/keyrings
-    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-    sudo chmod a+r /etc/apt/keyrings/docker.gpg
-    apt-cache policy docker-ce
-    sudo apt update -y
-    sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-    sudo usermod -aG docker ${USER}
-    su - ${USER}
-    groups
-    sudo wget -vc https://desktop.docker.com/linux/main/amd64/docker-desktop-4.15.0-amd64.deb
-    sudo apt install ./docker-desktop-4.15.0-amd64.deb
-  fi
+sudo mkdir -p /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+apt-cache policy docker-ce
+sudo apt update -y
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+sudo usermod -aG docker ${USER}
+su - ${USER}
+groups
+sudo wget -vc https://desktop.docker.com/linux/main/amd64/docker-desktop-4.15.0-amd64.deb
+sudo apt install ./docker-desktop-4.15.0-amd64.deb
+
   
 log_info "Installing Lando ..."
 sudo wget https://files.lando.dev/installer/lando-x64-stable.deb
