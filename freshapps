@@ -14,6 +14,7 @@ sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
 sudo rm -f /tmp/wps-office_11.1.0.11664.XA_amd64.deb
 sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
 sudo rm -f /tmp/lando-x64-stable.deb
+sudo rm -f /tmp/linux64
 sudo rm -f /tmp/teamviewer_amd64.deb
 sudo rm -f /tmp/local-6.5.2-linux.deb
 
@@ -159,6 +160,7 @@ sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
 sudo rm -f /tmp/wps-office_11.1.0.11664.XA_amd64.deb
 sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
 sudo rm -f /tmp/lando-x64-stable.deb
+sudo rm -f /tmp/linux64
 sudo rm -f /tmp/teamviewer_amd64.deb
 sudo rm -f /tmp/local-6.5.2-linux.deb
 
