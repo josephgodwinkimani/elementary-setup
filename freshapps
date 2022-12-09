@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+cd /tmp
+
+# clean up
+sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
+sudo rm -f /tmp/wps-office_11.1.0.11664.XA_amd64.deb
+sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
+sudo rm -f /tmp/lando-x64-stable.deb
+sudo rm -f /tmp/teamviewer_amd64.deb
+sudo rm -f /tmp/local-6.5.2-linux.deb
+
 sudo systemctl stop snapd
 sudo systemctl disable snapd
 sudo apt purge snapd
@@ -9,8 +19,6 @@ sudo autoremove -y
 
 sudo apt install -y ca-certificates curl gnupg lsb-release
 sudo apt update -y
-
-cd /tmp
 
 # install htop
 sudo apt install htop -y
