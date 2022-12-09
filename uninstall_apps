@@ -30,7 +30,8 @@ sudo rm -rf ~/.config/Code
 sudo apt purge remmina -y
 sudo apt purge remmina-plugin-rdp -y
 sudo apt purge remmina-plugin-secret -y
-sudo apt purge wps-office wps* -y
+sudo apt purge wps-office -y
+sudo apt purge wps* -y
 sudo rm -rf ~/.config/Kingsoft
 sudo rm -rf ~/.config/kingsoft
 sudo rm -rf ~/.local/share/Kingsoft
