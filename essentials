@@ -2,4 +2,5 @@
 
 sudo apt install -y flatpak gnome-software-plugin-flatpak io.elementary.wingpanel io.elementary.terminal io.elementary.settings-daemon io.elementary.notifications io.elementary.print io.elementary.code io.elementary.sideload io.elementary.screenshot
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub org.gnome.FileRoller
+flatpak install flathub io.github.peazip.PeaZip
+flatpak install flathub com.github.philip_scott.notes-up
