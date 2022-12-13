@@ -130,6 +130,18 @@ log_info "Installing Eddy debian package installer for elementary OS ..."
     cd ../
   fi
   
+log_info "Installing Wingpanel Monitor ..."
+  if ! com.github.plugarut.wingpanel-monitor --help-all; then
+    sudo apt install libgtop2-dev libgranite-dev libgtk-3-dev libwingpanel-3.0-dev meson valac libgeoclue-2-dev libgweather-3-dev libhandy-1-dev git -y
+    git clone https://github.com/PlugaruT/wingpanel-monitor.git wingpanel-monitor
+    cd wingpanel-monitor
+    meson build --prefix=/usr
+    cd build
+    ninja
+    sudo ninja install
+    cd ../
+  fi
+  
 log_info "Installing Gimp ..."
   if ! gimp --version; then
     sudo apt install gimp -y
