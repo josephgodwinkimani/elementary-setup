@@ -89,23 +89,7 @@ StartupWMClass=Postman
 StartupNotify=true
 EOF
 
-log_info "Installing Docker ..."
-sudo mkdir -p /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-apt-cache policy docker-ce
-sudo apt update -y
-sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-sudo usermod -aG docker ${USER}
-sudo wget -vc https://desktop.docker.com/linux/main/amd64/docker-desktop-4.15.0-amd64.deb
-sudo apt install ./docker-desktop-4.15.0-amd64.deb -y
 
-  
-log_info "Installing Lando ..."
-sudo wget https://files.lando.dev/installer/lando-x64-stable.deb
-sudo dpkg -i lando-x64-stable.deb
-sudo chown -R "${USER:=$(/usr/bin/id -run)}:$USER" .lando
 
 log_info "Installing Teamviewer ..."
   if ! teamviewer --version; then
@@ -174,13 +158,16 @@ log_info "Installing videoLan Player ..."
     sudo apt install vlc -y
     apt-cache policy vlc
   fi
+  
+log_info "Installing Docker ..."
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo systemctl enable docker
+sudo usermod -aG docker ${USER}
 
 log_info "Cleaning up ..."
 sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
 sudo rm -f /tmp/pycharm-community-2022.3.tar.gz
 sudo rm -f /tmp/wps-office_11.1.0.11664.XA_amd64.deb
-sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
-sudo rm -f /tmp/lando-x64-stable.deb
 sudo rm -f /tmp/linux64
 sudo rm -f /tmp/teamviewer_amd64.deb
 sudo rm -f /tmp/local-6.5.2-linux.deb
