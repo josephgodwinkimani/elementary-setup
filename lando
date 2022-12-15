@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+
+set -e
+log_info() {
+  printf "\n\e[0;35m $1\e[0m\n\n"
+}
+
+cd /tmp
+
+
+log_info "Installing Docker ..."
+sudo mkdir -p /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+apt-cache policy docker-ce
+sudo apt update -y
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+sudo usermod -aG docker ${USER}
+sudo wget -vc https://desktop.docker.com/linux/main/amd64/docker-desktop-4.15.0-amd64.deb
+sudo apt install ./docker-desktop-4.15.0-amd64.deb -y
+
+  
+log_info "Installing Lando ..."
+sudo wget https://files.lando.dev/installer/lando-x64-stable.deb
+sudo dpkg -i lando-x64-stable.deb
+sudo chown -R "${USER:=$(/usr/bin/id -run)}:$USER" .lando
+
+log_info "Cleaning up ..."
+sudo rm -f /tmp/docker-desktop-4.15.0-amd64.deb
+sudo rm -f /tmp/lando-x64-stable.deb
+
+apt list
+
+echo "###########################################################"
+echo "Visit https://lando.dev to get started with your first app"
+echo "###########################################################"
