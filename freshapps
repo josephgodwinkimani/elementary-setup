@@ -161,10 +161,18 @@ log_info "Installing videoLan Player ..."
   
 log_info "Installing Docker ..."
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R
+sudo systemctl disable --now docker.service docker.socket
+sudo apt-get install -y iptables uidmap dbus-user-session
+wget -cv https://raw.githubusercontent.com/josephgodwinkimani/elementaryos-setup/main/rootless.sh
+sh rootless.sh --force
+sudo usermod -a -G docker $USER
 sudo systemctl enable docker
-sudo systemctl enable containerd.service
-sudo usermod -aG docker ${USER}
-su - ${USER}
+sudo systemctl start docker
 
 log_info "Cleaning up ..."
 sudo rm -f /tmp/google-chrome-stable_current_amd64.deb
